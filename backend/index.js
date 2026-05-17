@@ -5,22 +5,23 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 const app = express();
+const router = express.Router();
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/health', (req, res) => {
+router.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
 // Users
-app.get('/api/users', async (req, res) => {
+router.get('/users', async (req, res) => {
   const users = await prisma.user.findMany();
   res.json(users);
 });
 
 // Create basic test user if none exist
-app.post('/api/init', async (req, res) => {
+router.post('/init', async (req, res) => {
   const count = await prisma.user.count();
   if (count === 0) {
     const admin = await prisma.user.create({
@@ -39,7 +40,7 @@ app.post('/api/init', async (req, res) => {
 });
 
 // Goals
-app.get('/api/goals/:userId', async (req, res) => {
+router.get('/goals/:userId', async (req, res) => {
   const { userId } = req.params;
   const user = await prisma.user.findUnique({ where: { id: parseInt(userId) } });
   
@@ -60,7 +61,7 @@ app.get('/api/goals/:userId', async (req, res) => {
   }
 });
 
-app.post('/api/goals', async (req, res) => {
+router.post('/goals', async (req, res) => {
   const { title, description, uom, target, weightage, ownerId } = req.body;
   try {
     const goal = await prisma.goal.create({
@@ -72,7 +73,7 @@ app.post('/api/goals', async (req, res) => {
   }
 });
 
-app.patch('/api/goals/:id', async (req, res) => {
+router.patch('/goals/:id', async (req, res) => {
   const { id } = req.params;
   const { title, description, uom, target, weightage, status } = req.body;
   try {
@@ -94,7 +95,7 @@ app.patch('/api/goals/:id', async (req, res) => {
 });
 
 // Check-ins
-app.get('/api/checkins/:userId', async (req, res) => {
+router.get('/checkins/:userId', async (req, res) => {
   const { userId } = req.params;
   const user = await prisma.user.findUnique({ where: { id: parseInt(userId) } });
   
@@ -113,7 +114,7 @@ app.get('/api/checkins/:userId', async (req, res) => {
   }
 });
 
-app.post('/api/checkins', async (req, res) => {
+router.post('/checkins', async (req, res) => {
   const { goalId, quarter, actual } = req.body;
   
   const goal = await prisma.goal.findUnique({ where: { id: parseInt(goalId) } });
@@ -149,7 +150,7 @@ app.post('/api/checkins', async (req, res) => {
   }
 });
 
-app.patch('/api/checkins/:id', async (req, res) => {
+router.patch('/checkins/:id', async (req, res) => {
   const { id } = req.params;
   const { comment } = req.body;
   try {
@@ -164,7 +165,7 @@ app.patch('/api/checkins/:id', async (req, res) => {
 });
 
 // System Stats for Reports Tab (Admin & Manager)
-app.get('/api/stats', async (req, res) => {
+router.get('/stats', async (req, res) => {
   try {
     const totalUsers = await prisma.user.count({ where: { role: 'EMPLOYEE' } });
     const totalGoals = await prisma.goal.count();
@@ -201,6 +202,11 @@ app.get('/api/stats', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+// Mount router for both local dev and Netlify functions
+app.use('/api', router);
+app.use('/.netlify/functions/api', router);
 
 module.exports = app;
 
