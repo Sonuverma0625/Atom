@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 const { PrismaClient } = require('@prisma/client');
 
@@ -207,6 +208,14 @@ router.get('/stats', async (req, res) => {
 // Mount router for both local dev and Netlify functions
 app.use('/api', router);
 app.use('/.netlify/functions/api', router);
+
+// Serve static assets from the React frontend build
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// Wildcard route to serve index.html for React Router
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 module.exports = app;
 
