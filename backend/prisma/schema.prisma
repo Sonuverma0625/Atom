@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   // EMPLOYEE, MANAGER, ADMIN
+  managerId Int?
+  manager   User?    @relation("ManagerToEmployee", fields: [managerId], references: [id])
+  employees User[]   @relation("ManagerToEmployee")
+  goals     Goal[]
+}
+
+model Goal {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  uom         String   // Min, Max, Timeline, Zero
+  target      Float
+  weightage   Float
+  status      String   @default("Pending Approval") // Pending Approval, Approved, Locked
+  ownerId     Int
+  owner       User     @relation(fields: [ownerId], references: [id])
+  checkIns    CheckIn[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CheckIn {
+  id          Int      @id @default(autoincrement())
+  goalId      Int
+  goal        Goal     @relation(fields: [goalId], references: [id])
+  quarter     String   // Q1, Q2, Q3, Q4
+  planned     Float
+  actual      Float?
+  comment     String?
+  status      String   @default("Not Started") // Not Started, On Track, Completed
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([goalId, quarter])
+}
