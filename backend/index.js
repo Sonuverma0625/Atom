@@ -212,8 +212,8 @@ app.use('/.netlify/functions/api', router);
 // Serve static assets from the React frontend build
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-// Wildcard route to serve index.html for React Router
-app.get('*', (req, res) => {
+// Wildcard fallback middleware to serve index.html for React Router
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
