@@ -31,7 +31,7 @@ const Home = () => {
 
       {/* About Us Section */}
       <section className="about-section" id="about">
-        <div className="about-container">
+        <div className="about-container grid-2-cols">
           <div className="about-image-wrapper">
             <div className="about-image-border"></div>
             <img src="/images/about.png" alt="Modern Office" className="about-image" />
@@ -47,7 +47,7 @@ const Home = () => {
             </p>
             
             {/* Core Values grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div className="grid-2-cols">
               <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                 <div style={{ padding: '8px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '8px', color: 'var(--primary-color)' }}>
                   <ShieldCheck size={18} />
@@ -79,7 +79,7 @@ const Home = () => {
           <div className="header-line" style={{ marginTop: '16px' }}></div>
         </div>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div className="pillars-grid">
           
           {/* Pillar 1: Alignment & Clarity */}
           <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', padding: '32px 24px' }}>
@@ -148,7 +148,7 @@ const Home = () => {
           <div className="header-line" style={{ marginTop: '16px' }}></div>
         </div>
         
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '60px', alignItems: 'center' }}>
+        <div className="governance-grid">
           
           {/* Governance Details Column */}
           <div style={{ display: 'grid', gap: '32px' }}>
@@ -190,7 +190,7 @@ const Home = () => {
           </div>
 
           {/* Graphical Governance Panel */}
-          <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', padding: '40px', border: '1px solid rgba(255, 255, 255, 0.1)', background: 'rgba(30, 41, 59, 0.4)' }}>
+          <div className="glass-card grid-2-cols" style={{ padding: '40px', border: '1px solid rgba(255, 255, 255, 0.1)', background: 'rgba(30, 41, 59, 0.4)' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ borderLeft: '3px solid var(--primary-color)', paddingLeft: '16px' }}>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Privilege Scopes</span>

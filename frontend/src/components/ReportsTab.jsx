@@ -41,7 +41,7 @@ const ReportsTab = () => {
       </header>
 
       {/* Grid of stats cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '32px' }}>
+      <div className="stats-grid">
         <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ padding: '12px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '12px', color: 'var(--primary-color)' }}>
             <Users size={24} />
@@ -84,7 +84,7 @@ const ReportsTab = () => {
       </div>
 
       {/* Main Charts & Visualization Section */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr', gap: '24px', marginBottom: '32px' }}>
+      <div className="charts-grid">
         
         {/* Compliance Progress Bars */}
         <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>

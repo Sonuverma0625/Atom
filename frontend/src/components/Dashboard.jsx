@@ -116,7 +116,7 @@ const Dashboard = ({ user, onLogout }) => {
       return (
         <>
           {/* Header Dashboard Metrics */}
-          <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
+          <header className="dashboard-header">
             <div>
               <h1 style={{ marginBottom: '8px' }}>My Goal Sheet</h1>
               <p style={{ color: 'var(--text-muted)' }}>Set corporate aligned targets and track manager approval states.</p>
@@ -127,7 +127,7 @@ const Dashboard = ({ user, onLogout }) => {
           </header>
 
           {/* Allocation Statistics Bar */}
-          <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1.2fr', gap: '32px', marginBottom: '32px', padding: '20px 24px', alignItems: 'center' }}>
+          <div className="glass-card metrics-grid">
             <div>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Weightage Allocation</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '6px' }}>
@@ -162,7 +162,7 @@ const Dashboard = ({ user, onLogout }) => {
                 <div key={goal.id} className="glass-card" style={{ borderLeft: getStatusBorder(goal.status), display: 'flex', flexDirection: 'column', gap: '20px', padding: '24px' }}>
                   
                   {/* Header Row */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div className="goal-header-row">
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
                         <h3 style={{ margin: 0, fontSize: '1.3rem' }}>{goal.title}</h3>
@@ -197,7 +197,7 @@ const Dashboard = ({ user, onLogout }) => {
                   )}
 
                   {/* Structured KPI Specs Grid */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr 1fr', gap: '24px', background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.04)', padding: '16px 20px', borderRadius: '12px', fontSize: '0.85rem' }}>
+                  <div className="kpi-grid">
                     <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                       <div style={{ padding: '6px', background: 'rgba(255,255,255,0.04)', borderRadius: '6px', color: 'var(--text-muted)' }}>
                         <Target size={16} />
@@ -260,8 +260,8 @@ const Dashboard = ({ user, onLogout }) => {
           </header>
 
           {/* Manager Overview Dashboard Bar */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '32px' }}>
-            <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1.2fr', gap: '24px', padding: '20px 24px', alignItems: 'center' }}>
+          <div className="manager-metrics-grid">
+            <div className="glass-card metrics-grid">
               <div>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Pending Audits</span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '6px' }}>
@@ -286,7 +286,7 @@ const Dashboard = ({ user, onLogout }) => {
             </div>
 
             {/* Glowing SVG Bar Chart Panel */}
-            <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: '1.2fr 2fr', gap: '24px', padding: '20px 24px', alignItems: 'center', height: '100%' }}>
+            <div className="glass-card" className="glass-card manager-chart-panel">
               <div style={{ display: 'grid', gap: '12px' }}>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>Goal Distribution</span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -373,7 +373,7 @@ const Dashboard = ({ user, onLogout }) => {
                 <div key={goal.id} className="glass-card" style={{ borderLeft: getStatusBorder(goal.status), display: 'flex', flexDirection: 'column', gap: '20px', padding: '24px' }}>
                   
                   {/* Employee Info Header Row */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '16px' }}>
+                  <div className="team-goal-employee-row">
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       {/* Circle Employee Avatar */}
                       <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 600, fontSize: '0.95rem' }}>
@@ -399,7 +399,7 @@ const Dashboard = ({ user, onLogout }) => {
                   </div>
 
                   {/* Structured KPI Specs Grid */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr 1fr', gap: '24px', background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.04)', padding: '16px 20px', borderRadius: '12px', fontSize: '0.85rem' }}>
+                  <div className="kpi-grid">
                     <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                       <div style={{ padding: '6px', background: 'rgba(255,255,255,0.04)', borderRadius: '6px', color: 'var(--text-muted)' }}>
                         <Target size={16} />

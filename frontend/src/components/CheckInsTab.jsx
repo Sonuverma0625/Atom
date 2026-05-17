@@ -79,9 +79,9 @@ const CheckInsTab = ({ user, goals }) => {
 
       {/* Analytics Deck */}
       {checkIns.length > 0 && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '32px' }}>
+        <div className="manager-metrics-grid">
           {/* Metrics Summary Card */}
-          <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', padding: '20px 24px', alignItems: 'center' }}>
+          <div className="glass-card metrics-grid">
             <div>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Total Submissions</span>
               <h3 style={{ margin: '6px 0 0 0', fontSize: '1.4rem' }}>{checkIns.length} <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Logged</span></h3>
@@ -106,7 +106,7 @@ const CheckInsTab = ({ user, goals }) => {
           </div>
 
           {/* Interactive SVG Check-in Distribution Chart */}
-          <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: '1.2fr 2fr', gap: '24px', padding: '20px 24px', alignItems: 'center' }}>
+          <div className="glass-card manager-chart-panel">
             <div style={{ display: 'grid', gap: '10px' }}>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '2px' }}>Submission Timeline</span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.75rem' }}>
@@ -159,7 +159,7 @@ const CheckInsTab = ({ user, goals }) => {
       {user.role !== 'MANAGER' && (
         <div className="glass-card mb-8">
           <h3>Log New Check-in</h3>
-          <form onSubmit={handleSubmitCheckIn} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '16px', alignItems: 'end', marginTop: '16px' }}>
+          <form onSubmit={handleSubmitCheckIn} className="checkin-form">
             <div className="input-group" style={{ marginBottom: 0 }}>
               <label>Select Goal</label>
               {availableGoals.length === 0 ? (
@@ -222,7 +222,7 @@ const CheckInsTab = ({ user, goals }) => {
                   </span>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', background: 'rgba(0,0,0,0.2)', padding: '12px', borderRadius: '8px', marginBottom: '16px' }}>
+                <div className="checkin-values-grid">
                   <div>
                     <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Planned Target</span>
                     <p style={{ margin: 0, fontWeight: 600 }}>{ci.planned} {ci.goal.uom}</p>
